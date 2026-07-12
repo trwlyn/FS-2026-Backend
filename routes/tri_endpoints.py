@@ -30,7 +30,7 @@ def get_book_detail(book_id: int):
         conn = get_db_connection()
         cur = conn.cursor()
 
-        # Pastikan Anda memanggil fungsi dari student1_queries.py
+
         book = fetch_book_by_id(cur, book_id)
 
         cur.close()
@@ -39,6 +39,6 @@ def get_book_detail(book_id: int):
         if book:
             return book
         else:
-            raise HTTPException(status_code=404, detail="Buku tidak ditemukan")
+            raise HTTPException(status_code=404, detail="Book not found")
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
