@@ -8,7 +8,6 @@ load_dotenv()
 
 # 2. Mengambil URL Database dari .env
 DATABASE_URL = os.getenv("DATABASE_URL")
-
 def get_db_connection():
     """
     Fungsi untuk membuat koneksi baru ke Neon PostgreSQL.
