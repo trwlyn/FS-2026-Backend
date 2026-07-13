@@ -1,13 +1,13 @@
 from pydantic import BaseModel, EmailStr, Field
 from typing import Optional
 
-# 1. Model untuk menerima data dari Formulir Kontak
+# 1. Model for receiving data from Contact Form
 class ContactIn(BaseModel):
     name: str = Field(..., min_length=2, max_length=100)
-    email: str # Anda bisa gunakan EmailStr jika sudah install 'pydantic[email]'
+    email: str #
     message: str = Field(..., min_length=5)
 
-# 2. Model untuk menampilkan data Buku (sesuai kolom di Neon DB)
+# 2.Model for displaying Book data (according to columns in Neon DB)
 class Book(BaseModel):
     id: int
     title: str
@@ -18,6 +18,6 @@ class Book(BaseModel):
     image_url: Optional[str] = None
     availability_status: Optional[str] = "Available"
 
-# 3. Model untuk Respon Sukses (Opsional, agar API lebih terstruktur)
+# 3. Model for success response
 class SuccessResponse(BaseModel):
     message: str
