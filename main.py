@@ -1,16 +1,22 @@
 import os
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from dotenv import load_dotenv
 from routes.tri_endpoints import router as tri_endpoints
 
-# Load variabel dari file .env
+# Load variabel from file .env
+load_dotenv()
 
-app = FastAPI()
+docs_url =os.getenv("DOCS_URL","/docs")
+allowed_origins = os.getenv("ALLOWED_ORIGINS", "*").split(",")
 
-# Izinkan Frontend mengakses API ini (CORS)
+app = FastAPI(docs_url=docs_url)
+
+# Allowed Frontend to access API (CORS)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=allowed_origins,
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
