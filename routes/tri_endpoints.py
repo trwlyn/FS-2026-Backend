@@ -16,13 +16,19 @@ def get_books():
 
 @router.post("/api/contact")
 def post_contact(contact: ContactIn):
-    conn = get_db_connection()
-    cur = conn.cursor()
-    insert_contact(cur, contact)
-    conn.commit()
-    cur.close()
-    conn.close()
-    return {"message": "Success"}
+    print(f"\n [NEW MESSAGE RECIEVED] \nName: {contact.name} \nEmail:{contact.email} \nMessage: {contact.message} \n" + "="*30)
+
+    try:
+        conn = get_db_connection()
+        cur = conn.cursor()
+        insert_contact(cur, contact)
+        conn.commit()
+        cur.close()
+        conn.close()
+        return {"message": "Success"}
+    except Exception as e:
+        print(f" Database ERROR: {e}")
+        raise HTTPException(status_code=500, detail="Internal Server ERROR")
 
 @router.get("/api/books/{book_id}")
 def get_book_detail(book_id: int):
