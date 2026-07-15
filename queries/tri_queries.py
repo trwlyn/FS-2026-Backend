@@ -11,6 +11,6 @@ def fetch_book_by_id(cur, book_id):
     return cur.fetchone()
 
 def fetch_all_contacts(cur);
-    query ="SELECT * FROM contacts ORDER BY created_at DESC"
+    query ="SELECT * FROM contacts ORDER BY created_at DESC")
     cur.execute(query)
     return cur.fetchall()
