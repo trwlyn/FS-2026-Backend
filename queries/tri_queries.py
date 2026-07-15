@@ -9,3 +9,8 @@ def fetch_all_books(cur):
 def fetch_book_by_id(cur, book_id):
     cur.execute("SELECT * FROM books WHERE id = %s", (book_id,))
     return cur.fetchone()
+
+def fetch_all_contacts(cur);
+    query ="SELECT * FROM contacts ORDER BY created_at DESC"
+    cur.execute(query)
+    return cur.fetchall()

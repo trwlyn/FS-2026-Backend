@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException
 from database import get_db_connection
 from models.tri_models import ContactIn
-from queries.tri_queries import insert_contact, fetch_all_books, fetch_book_by_id
+from queries.tri_queries import insert_contact, fetch_all_books, fetch_book_by_id, fetch_all_contacts
 
 router = APIRouter()
 
@@ -40,5 +40,17 @@ def get_book_detail(book_id: int):
             return book
         else:
             raise HTTPException(status_code=404, detail="Book not found")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@router.get("/api/contacts")
+def get_all_messages():
+    try:
+        conn = get_db_connection()
+        cur =conn.cursor()
+        messages = fetch_all_contacts(cur)
+        cur.close()
+        conn.close()
+        return messages
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
